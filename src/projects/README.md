@@ -1,12 +1,17 @@
-# 🔟 **Project Ideas**
+# 🧱 Week 10 – Advanced Spring Boot API Projects
 
-## ✅ **Dependencies (same for all projects)**
+This week focuses on building **complete REST APIs** using Spring Boot, JPA, DTOs, validation, and exception handling.
+Students will follow industry-level patterns and build practical, portfolio-ready projects.
 
-Add these in `pom.xml`:
+---
+
+## 🧩 Maven Dependencies (common to all projects)
+
+Add these to your `pom.xml`:
 
 ```xml
 <dependencies>
-    <!-- Spring Web -->
+    <!-- Spring Boot Web -->
     <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-web</artifactId>
@@ -14,193 +19,258 @@ Add these in `pom.xml`:
 
     <!-- Spring Data JPA -->
     <dependency>
-        <groupId>org.springframework.boot</groupId>
+        <groupId>org.springframework.boot</Id>
         <artifactId>spring-boot-starter-data-jpa</artifactId>
     </dependency>
 
-    <!-- Validation (important for Week 10) -->
+    <!-- Validation (DTOs & Inputs) -->
     <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-validation</artifactId>
     </dependency>
 
-    <!-- PostgreSQL Driver (or use H2 for simplicity) -->
+    <!-- PostgreSQL (or use H2 for testing) -->
     <dependency>
         <groupId>org.postgresql</groupId>
         <artifactId>postgresql</artifactId>
         <scope>runtime</scope>
-    </dependency>
-
-    <!-- Lombok (optional but useful for DTOs) -->
-    <dependency>
-        <groupId>org.projectlombok</groupId>
-        <artifactId>lombok</artifactId>
-        <optional>true</optional>
     </dependency>
 </dependencies>
 ```
 
 ---
 
-## 🏗 Project Structure (same for all)
+## 📁 Project Folder Structure
 
 ```txt
-spring-boot-validation-demo/
-├── controller/
-│   └── (handles requests using DTOs)
-├── service/
-│   └── (business logic)
-├── repository/
-│   └── (DB access)
-├── dto/
-│   ├── (request DTOs → validated inputs)
-│   └── (response DTOs → formatted outputs)
-├── model/
-│   └── (JPA Entities)
-├── exception/
-│   ├── GlobalExceptionHandler.java
-│   └── CustomExceptions.java
+spring-boot-advanced-api/
+├── controller/           → REST controllers
+├── service/              → Business logic
+├── repository/           → Database layer
+├── model/                → JPA entities
+├── dto/                  → Data Transfer Objects
+│   ├── request/          → Input DTOs
+│   └── response/         → Output DTOs
+├── mapper/               → MapStruct mappers
+├── exception/            → Custom exceptions + Global handler
 └── resources/
     └── application.properties
 ```
 
 ---
 
+## 1️⃣ **User Profile Manager (NO authentication)**
 
+Manage basic user profiles.
 
-## 1. **User Registration API**
+**Features:**
 
-Users sign up with name, email, and age.
+* Create user profile
+* Validate: name not blank, email valid
+* Unique email check
+* DTO → Validation → Mapper → Entity
+* Custom exception: `EmailAlreadyExistsException`
 
-* Validate email format, name length, and age >= 18.
-* Throw custom exception if email already exists.
-
-Entity: `User`
-RequestDTO: `CreateUserDTO`
-ResponseDTO: `UserDTO`
-
----
-
-## 2. **Product Catalog Service**
-
-CRUD for products.
-
-* Validate price > 0, name not blank.
-* Custom error if product is not found.
-
-Entity: `Product`
-DTOs: `ProductCreateDTO`, `ProductResponseDTO`
+**Entity:** `User`
+**DTOs:** `CreateUserDTO`, `UserResponseDTO`
 
 ---
 
-## 3. **Book Library System**
+# 2️⃣ **Product Catalog**
 
-Create and list books.
+Manage products with proper validation.
 
-* Validate ISBN length = 13.
-* Author name cannot be blank.
+**Features:**
 
-Entity: `Book`
-DTOs: `BookRequestDTO`, `BookResponseDTO`
+* Price > 0
+* Name not blank
+* Throw `ProductNotFoundException`
+* Return `201 CREATED` when adding new item
 
----
-
-## 4. **Student Enrollment API**
-
-Add & fetch students.
-
-* Validate email format, age >= 16.
-* Throw custom exception if student email already used.
-
-Entity: `Student`
-DTOs: `StudentInputDTO`, `StudentViewDTO`
+**Entity:** `Product`
+**DTOs:** `ProductCreateDTO`, `ProductResponseDTO`
 
 ---
 
-## 5. **Task Management API**
+# 3️⃣ **Book Manager API**
 
-Users create and track tasks.
+CRUD operations on books.
 
-* Validate title min length 3.
-* Optional due date, but if present → must be in the future.
+**Rules:**
 
-Entity: `Task`
-DTOs: `CreateTaskDTO`, `TaskDTO`
+* Title required
+* ISBN length must be exactly 13
+* Handle invalid input with validation
+* Custom error if book not found
 
----
-
-## 6. **Event Registration Service**
-
-Users register for events.
-
-* Validate event date is in the future.
-* Limit attendees ≤ maxSeats.
-
-Entities: `Event`, `Attendee`
-DTOs: `EventDTO`, `RegisterAttendeeDTO`
+**Entity:** `Book`
+**DTOs:** `BookCreateDTO`, `BookResponseDTO`
 
 ---
 
-## 7. **Contact Manager API**
+# 4️⃣ **Student Record System**
 
-Store contact info.
+Simple student management system.
 
-* Validate phone number format using regex.
-* Email unique constraint.
+**Validation:**
 
-Entity: `Contact`
-DTOs: `ContactCreateDTO`, `ContactResponseDTO`
+* Name not blank
+* Email valid
+* Age >= 16
 
----
-
-## 8. **Order & Checkout API**
-
-Users place orders for products.
-
-* Validate quantity >= 1.
-* Throw custom exceptions for invalid product IDs.
-
-Entities: `Order`, `OrderItem`
-DTOs: `CreateOrderDTO`, `OrderSummaryDTO`
+**Entity:** `Student`
+**DTOs:** `StudentInputDTO`, `StudentOutputDTO`
 
 ---
 
-## 9. **Car Rental Service**
+# 5️⃣ **Task Management API**
 
-Add cars and rent them.
+Manage tasks with due dates.
 
-* Validate license plate format.
-* Custom exception: "CarNotAvailableException".
+**Rules:**
 
-Entities: `Car`, `Rental`
-DTOs: `CarCreateDTO`, `RentalRequestDTO`, `RentalResponseDTO`
+* Title ≥ 3 characters
+* Due date in the future
+* Custom exception for invalid date or missing task
 
----
-
-## 10. **Feedback / Review Service**
-
-Users submit reviews for items.
-
-* Rating must be between 1 and 5.
-* Comment optional but max length 250 chars.
-
-Entity: `Review`
-DTOs: `ReviewRequestDTO`, `ReviewResponseDTO`
+**Entity:** `Task`
+**DTOs:** `TaskCreateDTO`, `TaskResponseDTO`
 
 ---
 
-## 🎓 What Students Practice in Every Project
+# 6️⃣ **Event Scheduling System**
 
-| Concept                                    | How It's Used                                            |
-|--------------------------------------------|----------------------------------------------------------|
-| DTOs                                       | Clean separation between input/output and database layer |
-| Validation (`@NotBlank`, `@Email`, `@Min`) | Ensures request data is correct                          |
-| `@Valid` in Controllers                    | Activate validation logic                                |
-| `ResponseEntity`                           | Return appropriate HTTP status codes                     |
-| `@ControllerAdvice`                        | Centralized error formatting                             |
-| Custom Exceptions                          | Better readability and debugging                         |
+Manage events & attendees (no authentication).
+
+**Rules:**
+
+* Event date must be in the future
+* Capacity >= 1
+* Prevent exceeding capacity via validation
+
+**Entities:** `Event`
+**DTOs:** `EventCreateDTO`, `EventResponseDTO`
 
 ---
-Happy Coding! 🚀
 
+# 7️⃣ **Contact Manager**
 
+Store and update contacts.
+
+**Rules:**
+
+* Phone must match regex pattern
+* Email must be valid
+* Name must not be blank
+* Custom exception for duplicate contacts
+
+**Entity:** `Contact`
+**DTOs:** `ContactCreateDTO`, `ContactResponseDTO`
+
+---
+
+# 8️⃣ **Order Processing API**
+
+(No checkout, no payment, just local CRUD)
+
+**Rules:**
+
+* Quantity >= 1
+* Order must contain at least one item
+* Validate product IDs
+* Throw custom exception when product not found
+
+**Entities:** `Order`, `OrderItem`, `Product`
+**DTOs:** `OrderRequestDTO`, `OrderResponseDTO`
+
+---
+
+# 9️⃣ **Car Rental**
+
+Simple system to manage car availability.
+
+**Rules:**
+
+* License plate format validation
+* Cannot rent a car already rented
+* Custom: `CarNotAvailableException`
+* Status: AVAILABLE / RENTED
+
+**Entities:** `Car`, `Rental`
+**DTOs:** `CarDTO`, `RentalRequestDTO`, `RentalResponseDTO`
+
+---
+
+# 🔟 **Product Reviews API**
+
+Users leave reviews (no login).
+
+**Rules:**
+
+* Rating from 1 to 5
+* Comment length ≤ 250
+* Product ID must exist
+* Return `404` when product missing
+
+**Entity:** `Review`
+**DTOs:** `ReviewRequestDTO`, `ReviewResponseDTO`
+
+---
+
+# 🆕 BONUS 
+
+These involve DTOs, services, mapping, and external data.
+
+---
+
+# 🔟➕1 **Country Importer API (External API → DB)**
+
+Fetch countries from REST Countries API:
+
+`https://restcountries.com/v3.1/name/{name}`
+
+**Flow:**
+
+* GET external data
+* Map JSON → DTO → Entity
+* Save to DB
+* Show stored countries
+
+**Skills:**
+External API, DTO Mapping, Exception Handling
+
+---
+
+# 🔟➕2 **Crypto Market Snapshot API**
+
+Fetch real crypto prices from CoinGecko API.
+`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1`
+
+**Rules:**
+
+* Fetch top 10
+* Save to DB
+* Prevent duplicate entries
+* Use DTOs to transform external JSON
+
+**Great for:**
+Mapping → DTO → Validation → Saving to DB.
+
+---
+
+# 🎯 What These Projects Teach Perfectly for Week 10
+
+| Concept              | Appears In Every Project                    |
+|----------------------|---------------------------------------------|
+| DTOs                 | Request & Response DTOs                     |
+| Validation           | `@NotBlank`, `@Min`, `@Email`, etc.         |
+| `@Valid`             | On controller methods                       |
+| Exception Handling   | `@ControllerAdvice`                         |
+| Custom Exceptions    | Not-found, duplicate, capacity, date errors |
+| ResponseEntity       | Return correct HTTP codes                   |
+| Services             | Clean business logic                        |
+| Repositories         | CRUD using JPA                              |
+| Mappers              | MapStruct or manual mapping                 |
+| Layered Architecture | Controller → Service → Repo                 |
+
+---
