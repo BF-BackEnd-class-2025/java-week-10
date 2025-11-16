@@ -106,24 +106,19 @@ Benefits:
 ## 🏗️ Example Project Structure
 
 ```txt
-spring-boot-validation-demo/
-├── controller/
-│   └── (handles requests using DTOs)
-├── service/
-│   └── (business logic)
-├── repository/
-│   └── (DB access)
-├── dto/
-│   └── (request & response DTOs)
-├── model/
-│   └── (JPA Entities)
-├── exception/
-│   ├── GlobalExceptionHandler.java
-│   └── CustomExceptions.java
+spring-boot-advanced-api/
+├── controller/           → REST controllers
+├── service/              → Business logic
+├── repository/           → Database layer
+├── model/                → JPA entities
+├── dto/                  → Data Transfer Objects
+│   ├── request/          → Input DTOs
+│   └── response/         → Output DTOs
+├── mapper/               → MapStruct mappers
+├── exception/            → Custom exceptions + Global handler
 └── resources/
     └── application.properties
 ```
-
 ---
 
 ## ✅ Expected Outcome by End of Week
