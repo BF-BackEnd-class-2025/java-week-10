@@ -11,25 +11,39 @@ Add these to your `pom.xml`:
 
 ```xml
 <dependencies>
-    <!-- Spring Boot Web -->
+   <!-- Spring Web Starter -->
     <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
 
+    <!-- Spring Boot Test Starter -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-test</artifactId>
+        <scope>test</scope>
+    </dependency>
+
+    <!-- Spring Boot DevTools -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-devtools</artifactId>
+        <optional>true</optional>
+    </dependency>
+
     <!-- Spring Data JPA -->
     <dependency>
-        <groupId>org.springframework.boot</Id>
+        <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-data-jpa</artifactId>
     </dependency>
 
-    <!-- Validation (DTOs & Inputs) -->
+    <!-- Bean Validation -->
     <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-validation</artifactId>
     </dependency>
 
-    <!-- PostgreSQL (or use H2 for testing) -->
+    <!-- PostgreSQL driver -->
     <dependency>
         <groupId>org.postgresql</groupId>
         <artifactId>postgresql</artifactId>
