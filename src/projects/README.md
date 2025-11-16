@@ -59,171 +59,171 @@ spring-boot-advanced-api/
 
 ---
 
-## 1️⃣ **User Profile Manager (NO authentication)**
+## 1️⃣ **User Profile Manager**
 
 Manage basic user profiles.
 
 **Features:**
 
-* Create user profile
-* Validate: name not blank, email valid
-* Unique email check
-* DTO → Validation → Mapper → Entity
-* Custom exception: `EmailAlreadyExistsException`
+- Create user profile
+- Validate: name not blank, email valid
+- Unique email check
+- DTO → Validation → Mapper → Entity
+- Custom exception: `EmailAlreadyExistsException`
 
 **Entity:** `User`
 **DTOs:** `CreateUserDTO`, `UserResponseDTO`
 
 ---
 
-# 2️⃣ **Product Catalog**
+## 2️⃣ **Product Catalog**
 
 Manage products with proper validation.
 
 **Features:**
 
-* Price > 0
-* Name not blank
-* Throw `ProductNotFoundException`
-* Return `201 CREATED` when adding new item
+- Price > 0
+- Name not blank
+- Throw `ProductNotFoundException`
+- Return `201 CREATED` when adding new item
 
 **Entity:** `Product`
 **DTOs:** `ProductCreateDTO`, `ProductResponseDTO`
 
 ---
 
-# 3️⃣ **Book Manager API**
+## 3️⃣ **Book Manager API**
 
 CRUD operations on books.
 
 **Rules:**
 
-* Title required
-* ISBN length must be exactly 13
-* Handle invalid input with validation
-* Custom error if book not found
+- Title required
+- ISBN length must be exactly 13
+- Handle invalid input with validation
+- Custom error if book not found
 
 **Entity:** `Book`
 **DTOs:** `BookCreateDTO`, `BookResponseDTO`
 
 ---
 
-# 4️⃣ **Student Record System**
+## 4️⃣ **Student Record System**
 
 Simple student management system.
 
 **Validation:**
 
-* Name not blank
-* Email valid
-* Age >= 16
+- Name not blank
+- Email valid
+- Age >= 16
 
 **Entity:** `Student`
 **DTOs:** `StudentInputDTO`, `StudentOutputDTO`
 
 ---
 
-# 5️⃣ **Task Management API**
+## 5️⃣ **Task Management API**
 
 Manage tasks with due dates.
 
 **Rules:**
 
-* Title ≥ 3 characters
-* Due date in the future
-* Custom exception for invalid date or missing task
+- Title ≥ 3 characters
+- Due date in the future
+- Custom exception for invalid date or missing task
 
 **Entity:** `Task`
 **DTOs:** `TaskCreateDTO`, `TaskResponseDTO`
 
 ---
 
-# 6️⃣ **Event Scheduling System**
+## 6️⃣ **Event Scheduling System**
 
 Manage events & attendees (no authentication).
 
 **Rules:**
 
-* Event date must be in the future
-* Capacity >= 1
-* Prevent exceeding capacity via validation
+- Event date must be in the future
+- Capacity >= 1
+- Prevent exceeding capacity via validation
 
 **Entities:** `Event`
 **DTOs:** `EventCreateDTO`, `EventResponseDTO`
 
 ---
 
-# 7️⃣ **Contact Manager**
+## 7️⃣ **Contact Manager**
 
 Store and update contacts.
 
 **Rules:**
 
-* Phone must match regex pattern
-* Email must be valid
-* Name must not be blank
-* Custom exception for duplicate contacts
+- Phone must match regex pattern
+- Email must be valid
+- Name must not be blank
+- Custom exception for duplicate contacts
 
 **Entity:** `Contact`
 **DTOs:** `ContactCreateDTO`, `ContactResponseDTO`
 
 ---
 
-# 8️⃣ **Order Processing API**
+## 8️⃣ **Order Processing API**
 
 (No checkout, no payment, just local CRUD)
 
 **Rules:**
 
-* Quantity >= 1
-* Order must contain at least one item
-* Validate product IDs
-* Throw custom exception when product not found
+- Quantity >= 1
+- Order must contain at least one item
+- Validate product IDs
+- Throw custom exception when product not found
 
 **Entities:** `Order`, `OrderItem`, `Product`
 **DTOs:** `OrderRequestDTO`, `OrderResponseDTO`
 
 ---
 
-# 9️⃣ **Car Rental**
+## 9️⃣ **Car Rental**
 
 Simple system to manage car availability.
 
 **Rules:**
 
-* License plate format validation
-* Cannot rent a car already rented
-* Custom: `CarNotAvailableException`
-* Status: AVAILABLE / RENTED
+- License plate format validation
+- Cannot rent a car already rented
+- Custom: `CarNotAvailableException`
+- Status: AVAILABLE / RENTED
 
 **Entities:** `Car`, `Rental`
 **DTOs:** `CarDTO`, `RentalRequestDTO`, `RentalResponseDTO`
 
 ---
 
-# 🔟 **Product Reviews API**
+## 🔟 **Product Reviews API**
 
 Users leave reviews (no login).
 
 **Rules:**
 
-* Rating from 1 to 5
-* Comment length ≤ 250
-* Product ID must exist
-* Return `404` when product missing
+- Rating from 1 to 5
+- Comment length ≤ 250
+- Product ID must exist
+- Return `404` when product missing
 
 **Entity:** `Review`
 **DTOs:** `ReviewRequestDTO`, `ReviewResponseDTO`
 
 ---
 
-# 🆕 BONUS 
+## 🆕 BONUS
 
 These involve DTOs, services, mapping, and external data.
 
 ---
 
-# 🔟➕1 **Country Importer API (External API → DB)**
+## 🔟➕1 **Country Importer API (External API → DB)**
 
 Fetch countries from REST Countries API:
 
@@ -231,37 +231,37 @@ Fetch countries from REST Countries API:
 
 **Flow:**
 
-* GET external data
-* Map JSON → DTO → Entity
-* Save to DB
-* Show stored countries
+- GET external data
+- Map JSON → DTO → Entity
+- Save to DB
+- Show stored countries
 
 **Skills:**
 External API, DTO Mapping, Exception Handling
 
 ---
 
-# 🔟➕2 **Crypto Market Snapshot API**
+## 🔟➕2 **Crypto Market Snapshot API**
 
 Fetch real crypto prices from CoinGecko API.
 `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1`
 
 **Rules:**
 
-* Fetch top 10
-* Save to DB
-* Prevent duplicate entries
-* Use DTOs to transform external JSON
+- Fetch top 10
+- Save to DB
+- Prevent duplicate entries
+- Use DTOs to transform external JSON
 
 **Great for:**
 Mapping → DTO → Validation → Saving to DB.
 
 ---
 
-# 🎯 What These Projects Teach Perfectly for Week 10
+## 🎯 What These Projects Teach Perfectly for Week 10
 
 | Concept              | Appears In Every Project                    |
-|----------------------|---------------------------------------------|
+| -------------------- | ------------------------------------------- |
 | DTOs                 | Request & Response DTOs                     |
 | Validation           | `@NotBlank`, `@Min`, `@Email`, etc.         |
 | `@Valid`             | On controller methods                       |

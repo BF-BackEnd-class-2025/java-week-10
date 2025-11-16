@@ -4,7 +4,7 @@ When something goes wrong in your API — invalid input, missing data, wrong for
 **clear and friendly error messages**, not long stack traces.
 Spring Boot gives us a way to handle exceptions **globally** using:
 
-```
+```txt
 @RestControllerAdvice + @ExceptionHandler
 ```
 
@@ -16,7 +16,7 @@ This keeps **controllers clean** and handles errors **in one place**.
 
 Without a handler, validation or runtime errors return messy responses:
 
-```
+```txt
 400 Bad Request
 Full stack trace shown → confusing for clients
 ```
@@ -58,7 +58,7 @@ public ResponseEntity<ContactResponseDTO> create(@Valid @RequestBody ContactRequ
 
 ## 🛡️ Step 2 — Create Global Exception Handler
 
-```
+```txt
 src/main/java/.../exception/GlobalExceptionHandler.java
 ```
 
@@ -139,7 +139,7 @@ public class ProductController
 
 ## 🧪 Example Validation Error Response
 
-### If client sends invalid JSON:
+### If client sends invalid JSON
 
 ```json
 POST /recipes
@@ -150,7 +150,7 @@ POST /recipes
 }
 ```
 
-### API Response:
+### API Response
 
 ```json
 {
@@ -186,5 +186,3 @@ Your API now:
 * Is **professional and production-ready**
 
 ---
-
-

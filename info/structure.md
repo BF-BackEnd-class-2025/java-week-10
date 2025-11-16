@@ -47,7 +47,7 @@ public class User {
 }
 ```
 
-🧠 Think of the **model** as the *blueprint* of your database tables.
+🧠 Think of the **model** as the _blueprint_ of your database tables.
 
 ---
 
@@ -81,8 +81,8 @@ It connects the **controller** and **repository** layers.
 
 **Common annotations:**
 
-* `@Service` → marks the class as a service component (managed by Spring).
-* `@Transactional` → ensures that database operations are executed as a single transaction.
+- `@Service` → marks the class as a service component (managed by Spring).
+- `@Transactional` → ensures that database operations are executed as a single transaction.
 
 **Example:**
 
@@ -133,9 +133,9 @@ It handles HTTP requests (`GET`, `POST`, `PUT`, `DELETE`) and calls the service 
 
 **Common annotations:**
 
-* `@RestController` → marks the class as a REST API controller.
-* `@RequestMapping("/path")` → sets the base URL for the controller.
-* `@GetMapping`, `@PostMapping`, `@PutMapping`, `@DeleteMapping` → handle HTTP methods.
+- `@RestController` → marks the class as a REST API controller.
+- `@RequestMapping("/path")` → sets the base URL for the controller.
+- `@GetMapping`, `@PostMapping`, `@PutMapping`, `@DeleteMapping` → handle HTTP methods.
 
 **Example:**
 
@@ -185,7 +185,7 @@ public class UserController {
 ## 🧩 How the Layers Work Together
 
 ```txt
-[Client / Frontend] 
+[Client / Frontend]
        ↓
 [Controller] → handles HTTP request (API endpoint)
        ↓
@@ -201,7 +201,7 @@ public class UserController {
 ## ✅ Summary
 
 | Package      | Role                               | Example Class         |
-|--------------|------------------------------------|-----------------------|
+| ------------ | ---------------------------------- | --------------------- |
 | `model`      | Defines entities / database tables | `User.java`           |
 | `repository` | Handles data access (CRUD)         | `UserRepository.java` |
 | `service`    | Contains business logic            | `UserService.java`    |

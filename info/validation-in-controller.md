@@ -11,11 +11,11 @@ Spring Boot integrates with **Jakarta Bean Validation** (hibernate-validator und
 
 `@Valid` is used to trigger validation on **Java objects**, typically DTOs or Entities passed through `@RequestBody`.
 
-### Example
+### Example Valid
 
 ```java
 @PostMapping
-public ResponseEntity<Contact> create(@Valid @RequestBody Contact contact) 
+public ResponseEntity<Contact> create(@Valid @RequestBody Contact contact)
 {
     Contact saved = service.create(contact);
     return ResponseEntity.status(201).body(saved);
@@ -26,7 +26,7 @@ If the object has validation annotations (like `@NotBlank`, `@Email`), Spring au
 
 If validation fails → Spring throws:
 
-```
+```txt
 MethodArgumentNotValidException
 ```
 
@@ -36,9 +36,9 @@ MethodArgumentNotValidException
 
 `@Validated` works similarly to `@Valid`, but **also enables validation at the method level**, including:
 
-* `@RequestParam`
-* `@PathVariable`
-* Validation groups
+- `@RequestParam`
+- `@PathVariable`
+- Validation groups
 
 ### Example
 
@@ -52,7 +52,7 @@ import org.springframework.validation.annotation.Validated;
 public class ContactController {
 
     @GetMapping("/{id}")
-    public ResponseEntity<Contact> getById(@PathVariable @Min(1) Long id) 
+    public ResponseEntity<Contact> getById(@PathVariable @Min(1) Long id)
     {
         Contact contact = service.getById(id);
         return (contact != null)
@@ -64,7 +64,7 @@ public class ContactController {
 
 If ID is less than 1, Spring throws:
 
-```
+```txt
 ConstraintViolationException
 ```
 
@@ -73,7 +73,7 @@ ConstraintViolationException
 ## 3. When to Use Which?
 
 | Situation                                     | Use          | Reason                             |
-|-----------------------------------------------|--------------|------------------------------------|
+| --------------------------------------------- | ------------ | ---------------------------------- |
 | Validating `@RequestBody` JSON object         | `@Valid`     | Field-level model validation       |
 | Validating `@PathVariable` or `@RequestParam` | `@Validated` | Enables method-level validation    |
 | Working with validation groups                | `@Validated` | Supports groups, `@Valid` does not |
@@ -87,7 +87,7 @@ We handle them **centrally** using `@RestControllerAdvice`.
 
 Create:
 
-```
+```txt
 src/main/java/.../exception/GlobalExceptionHandler.java
 ```
 
@@ -95,11 +95,11 @@ src/main/java/.../exception/GlobalExceptionHandler.java
 
 ```java
 @RestControllerAdvice
-public class GlobalExceptionHandler 
+public class GlobalExceptionHandler
 {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, String> handleValidationErrors(MethodArgumentNotValidException ex) 
+    public Map<String, String> handleValidationErrors(MethodArgumentNotValidException ex)
     {
         Map<String, String> errors = new HashMap<>();
         ex.getBindingResult().getFieldErrors().forEach(error ->
@@ -126,7 +126,7 @@ public class GlobalExceptionHandler
 ```java
 @ResponseStatus(HttpStatus.BAD_REQUEST)
 @ExceptionHandler(ConstraintViolationException.class)
-public Map<String, String> handleConstraintViolation(ConstraintViolationException ex) 
+public Map<String, String> handleConstraintViolation(ConstraintViolationException ex)
 {
     Map<String, String> errors = new HashMap<>();
     ex.getConstraintViolations().forEach(violation ->
@@ -144,7 +144,7 @@ public Map<String, String> handleConstraintViolation(ConstraintViolationExceptio
 ## 5. Summary Table
 
 | Validation Type     | Annotation   | Works On                         | Exception Type                    | Global Handler                |
-|---------------------|--------------|----------------------------------|-----------------------------------|-------------------------------|
+| ------------------- | ------------ | -------------------------------- | --------------------------------- | ----------------------------- |
 | Request Body Object | `@Valid`     | `@RequestBody` DTO/entity        | `MethodArgumentNotValidException` | `handleValidationErrors()`    |
 | Path / Query Param  | `@Validated` | `@PathVariable`, `@RequestParam` | `ConstraintViolationException`    | `handleConstraintViolation()` |
 

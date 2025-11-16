@@ -4,7 +4,7 @@
 
 A **DTO (Data Transfer Object)** is a simple Java class used to **transfer data** between layers of your application, especially between:
 
-```
+```txt
 Client → Controller → Service → Database
 ```
 
